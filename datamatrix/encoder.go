@@ -67,11 +67,11 @@ func encodeText(content string) []byte {
 			i++
 			cw := byte(((c-'0')*10 + (c2 - '0')) + 130)
 			result = append(result, cw)
+		} else if isGS1 && c == FNC1 {
+			result = append(result, c)
 		} else if c > 127 {
 			// not correct... needs to be redone later...
 			result = append(result, 235, c-127)
-		} else if isGS1 && c == FNC1 {
-			result = append(result, c)
 		} else {
 			result = append(result, c+1)
 		}
