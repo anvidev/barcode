@@ -7,6 +7,13 @@ import (
 	"github.com/anvidev/barcode"
 )
 
+// FNC1 is the codeword for the Function 1 Symbol Character to
+// differentiate a GS1 DataMatrix from other Data Matrix symbols.
+//
+// It is used as both a start character and a separator of GS1 elementAdd commentMore actions
+// strings.
+const FNC1 byte = 232
+
 // Encode returns a Datamatrix barcode for the given content and color scheme
 func EncodeWithColor(content string, color barcode.ColorScheme) (barcode.Barcode, error) {
 	data := encodeText(content)
@@ -48,6 +55,8 @@ func encodeText(content string) []byte {
 	var result []byte
 	input := []byte(content)
 
+	isGS1 := len(input) > 0 && input[0] == FNC1
+
 	for i := 0; i < len(input); {
 		c := input[i]
 		i++
@@ -61,6 +70,8 @@ func encodeText(content string) []byte {
 		} else if c > 127 {
 			// not correct... needs to be redone later...
 			result = append(result, 235, c-127)
+		} else if isGS1 && c == FNC1 {
+			result = append(result, c)
 		} else {
 			result = append(result, c+1)
 		}
