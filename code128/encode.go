@@ -6,8 +6,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/boombuler/barcode"
-	"github.com/boombuler/barcode/utils"
+	"github.com/anvidev/barcode"
+	"github.com/anvidev/barcode/utils"
 )
 
 func strToRunes(str string) []rune {

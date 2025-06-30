@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/boombuler/barcode"
-	"github.com/boombuler/barcode/utils"
+	"github.com/anvidev/barcode"
+	"github.com/anvidev/barcode/utils"
 )
 
 type encodeInfo struct {
